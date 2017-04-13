@@ -1,13 +1,20 @@
 # virtual-app-consumer
 A shippable 'virtual app'`container for the iQAS platform that consumes observations from Kafka topic(s).
 
-### Building the virtual app container
+## System requirements
+
+In order to correctly work, a virtual-app-consumer requires that the following software have been correctly installed and are currently running:
+* Apache Zookeeper `3.4.9`
+* Apache Kafka `0.10.2.0`
+* Logstash `5.3.0`
+
+## Building the virtual app container
 Inside the resources root directory (`virtual-app-consumer`), type the following command:
 ```
 $ docker build -t antoineog/virtual-app-consumer .
 ```
 
-### Running the virtual app container
+## Running the virtual app container
 The generic command is:
 ```
 $ docker run -p 127.0.0.1:PORT:8080 antoineog/virtual-app-consumer
@@ -19,7 +26,11 @@ You should specify the following MANDATORY and [OPTIONAL] arguments:
 
 For instance, following commands are valid:
 ```
-TODO
+docker run -d -p 127.0.0.1:PORT:8080 antoineog/virtual-app-consumer APP_ID REQUEST 
+```
+
+```
+docker run -d -p 127.0.0.1:PORT:8080 antoineog/virtual-app-consumer APP_ID -f path/to/json/file 
 ```
 
 To exit the container, just press `CTRL` + `C`.
@@ -29,7 +40,7 @@ Instead, if you prefer to run the docker container in background (in detached mo
 $ docker run -d -p 127.0.0.1:9092:8080 antoineog/virtual-app-consumer
 ```
 
-### Managing the virtual app container
+## Managing the virtual app container
 
 The following are a quick remainder of basic docker commands.
 
