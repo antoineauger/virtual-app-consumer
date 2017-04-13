@@ -11,6 +11,7 @@ from utils.report import Report
 class Consumer(threading.Thread):
     def __init__(self, config, topics_to_subscribe):
         threading.Thread.__init__(self)
+        self.config = config
         self._stop_event = threading.Event()  # to stop the main thread
         self.kafka_consumer = None
         self.topics_to_subscribe = topics_to_subscribe
@@ -28,18 +29,18 @@ class Consumer(threading.Thread):
 
     def run(self):
         self.kafka_consumer = KafkaConsumer(bootstrap_servers='10.161.3.181:9092',
-                                            client_id='dummy-consumer',
-                                            group_id='dummy-consumer',
+                                            client_id=self.config['application_id'] + "_" + self.config['request_id'],
+                                            group_id=self.config['application_id'],
                                             auto_offset_reset='earliest',
                                             value_deserializer=lambda m: json.loads(m.decode('ascii')))
         self.kafka_consumer.subscribe(self.topics_to_subscribe)
 
         for record in self.kafka_consumer:
-            # print(json.dumps(ObsUtils.consume_obs(consumer_record=record, append_timestamp=True)))
             observation = ObsUtils.consume_obs(consumer_record=record, append_timestamp=True)
+            print(observation)
             self.consumed_battery += 0.01
             rep = Report(battery_level=self.consumed_battery,
                          timestamps=observation['timestamps'],
-                         application_id='dummy-consumer',
+                         application_id=self.config['application_id'],
                          provenance=observation['producer'])
-            self.test_logger.info(msg='test extra fields', extra=rep.metrics)
+            self.test_logger.info(msg='TEST', extra=rep.metrics)
