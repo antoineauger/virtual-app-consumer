@@ -17,27 +17,31 @@ $ docker build -t antoineog/virtual-app-consumer .
 ## Running the virtual app container
 The generic command is:
 ```
-$ docker run -p 127.0.0.1:PORT:8080 antoineog/virtual-app-consumer
+$ docker run -p 127.0.0.1:PORT:8080 antoineog/virtual-app-consumer APPLICATION_ID JSON_REQUEST
 ```
 
 You should specify the following MANDATORY and [OPTIONAL] arguments:
 
-* TODO
+* `APPLICATION_ID`: The name of the virtual application
+* `JSON_REQUEST`: A string that represent the request to send to the iQAS platform (remember to escape double quotes. E.g., `"{\\"param\\": \\"value\\"}"`).
+* You can also pass the request by specifying a file path instead with option `-f PATH/TO/JSON/FILE`. 
+
+Note: for more details about the format of an iQAS request, please refer to the documentation of the iQAS platform: <https://github.com/antoineauger/iqas-platform>.
 
 For instance, following commands are valid:
 ```
-docker run -d -p 127.0.0.1:PORT:8080 antoineog/virtual-app-consumer APP_ID REQUEST 
+docker run antoineog/virtual-app-consumer app1 "{\\"topic\\": \\"ALL\\", \\"location\\": \\"ALL\\", \\"obs_level\\": \\"INFORMATION\\"}" 
 ```
 
 ```
-docker run -d -p 127.0.0.1:PORT:8080 antoineog/virtual-app-consumer APP_ID -f path/to/json/file 
+docker run antoineog/virtual-app-consumer app2 -f ../templates/request.json 
 ```
 
 To exit the container, just press `CTRL` + `C`.
 
 Instead, if you prefer to run the docker container in background (in detached mode), just add the `-d` option:
 ```
-$ docker run -d -p 127.0.0.1:9092:8080 antoineog/virtual-app-consumer
+$ docker run -d antoineog/virtual-app-consumer app2 -f ../templates/request.json
 ```
 
 ## Managing the virtual app container
