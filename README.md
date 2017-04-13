@@ -30,11 +30,11 @@ Note: for more details about the format of an iQAS request, please refer to the 
 
 For instance, following commands are valid:
 ```
-docker run antoineog/virtual-app-consumer app1 "{\\"topic\\": \\"ALL\\", \\"location\\": \\"ALL\\", \\"obs_level\\": \\"INFORMATION\\"}" 
+$ docker run antoineog/virtual-app-consumer app1 "{\\"topic\\": \\"ALL\\", \\"location\\": \\"ALL\\", \\"obs_level\\": \\"INFORMATION\\"}" 
 ```
 
 ```
-docker run antoineog/virtual-app-consumer app2 -f ../templates/request.json 
+$ docker run antoineog/virtual-app-consumer app2 -f ../templates/request.json 
 ```
 
 To exit the container, just press `CTRL` + `C`.
