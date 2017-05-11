@@ -4,8 +4,9 @@ import threading
 
 import logstash
 from kafka import KafkaConsumer
+
+from report import RDorInformationReport, KnowledgeReport
 from utils.obs_utils import ObsUtils
-from utils.report import Report
 
 
 class Consumer(threading.Thread):
@@ -36,11 +37,17 @@ class Consumer(threading.Thread):
         self.kafka_consumer.subscribe(self.topics_to_subscribe)
 
         for record in self.kafka_consumer:
-            observation = ObsUtils.consume_obs(consumer_record=record, append_timestamp=True)
+            observation = ObsUtils.consume_obs(config=self.config, consumer_record=record, append_timestamp=True)
             print(observation)
             self.consumed_battery += 0.01
-            rep = Report(battery_level=self.consumed_battery,
-                         timestamps=observation['timestamps'],
-                         application_id=self.config['application_id'],
-                         provenance=observation['producer'])
-            self.test_logger.info(msg='TEST', extra=rep.metrics)
+
+            if self.config['iqas_request']['obs_level'] == 'RAW_DATA' or self.config['iqas_request']['obs_level'] == 'INFORMATION':
+                rep = RDorInformationReport(observation=observation,
+                                            config=self.config,
+                                            battery_level=self.consumed_battery)
+                self.test_logger.info(msg='TEST', extra=rep.metrics)
+            elif self.config['iqas_request']['obs_level'] == 'KNOWLEDGE':
+                rep = KnowledgeReport(observation=observation,
+                                      config=self.config,
+                                      battery_level=self.consumed_battery)
+                self.test_logger.info(msg='TEST', extra=rep.metrics)
