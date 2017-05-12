@@ -1,7 +1,7 @@
 # A shippable 'virtual app' for the iQAS platform
 # VERSION: 1.0
 
-FROM ubuntu:16.04
+FROM debian:jessie
 MAINTAINER Antoine Auger <antoine.auger@isae.fr>
 
 # To pass in arguments rather than here
@@ -18,9 +18,7 @@ ENV no_proxy 10.161.3.181
 RUN groupadd web
 RUN useradd -d /home/bottle -m bottle
 
-# make sure sources are up to date
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse" > /etc/apt/sources.list
-
+# make sure packages are up to date
 RUN apt-get update && apt-get install -y \ 
 	net-tools \
 	python3-pip
@@ -37,5 +35,5 @@ COPY . /home/bottle/virtualApp
 
 # in case you'd prefer to use links, expose the port
 WORKDIR /home/bottle/virtualApp/src
-ENTRYPOINT ["/usr/bin/python3", "/home/bottle/virtualApp/src/main.py"]
+ENTRYPOINT ["/usr/bin/python3", "-u", "/home/bottle/virtualApp/src/main.py"]
 USER bottle
