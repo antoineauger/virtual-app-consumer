@@ -36,7 +36,7 @@ Note: for more details about the format of an iQAS request, please refer to the 
 
 For instance, following commands are valid:
 ```
-$ docker run antoineog/virtual-app-consumer -withIQAS app1 "{\"topic\": \"ALL\, \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}" 
+$ docker run antoineog/virtual-app-consumer -withIQAS app1 "{\"application_id\": \"app1\", \"topic\": \"ALL\", \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}" 
 ```
 
 ```
@@ -47,7 +47,7 @@ To exit the container, just press `CTRL` + `C`.
 
 Instead, if you prefer to run the docker container in background (in detached mode), just add the `-d` option:
 ```
-$ docker run -d antoineog/virtual-app-consumer -withIQAS app1 "{\"topic\": \"ALL\, \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}" 
+$ docker run -d antoineog/virtual-app-consumer -withIQAS app1 "{\"application_id\": \"app1\", \"topic\": \"ALL\", \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}" 
 ```
 
 
