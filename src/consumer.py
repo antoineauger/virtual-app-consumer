@@ -23,13 +23,13 @@ class Consumer(object):
                                             group_id=None,
                                             auto_offset_reset='latest',
                                             enable_auto_commit=False,
-                                            fetch_min_bytes=1,
-                                            reconnect_backoff_ms=10,
+                                            receive_buffer_bytes=65536,
                                             check_crcs=False,
                                             value_deserializer=lambda m: json.loads(m.decode('ascii')))
         self.kafka_consumer.subscribe(self.topics_to_subscribe)
 
         for record in self.kafka_consumer:
+            print(str(record))
             timestamp_consumption = TimeUtils.current_milli_time()
             report = None
             if self.config['use_iqas']:
