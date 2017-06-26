@@ -1,13 +1,35 @@
 # virtual-app-consumer
-A shippable 'virtual app'`container that consumes observations from Kafka topic(s) through the iQAS platform or not.
+A shippable "virtual app" container that consumes observations from Kafka topic(s) through the iQAS platform or not.
 
 ## System requirements
 
 In order to correctly work, a virtual-app-consumer requires that the following software have been correctly installed and are currently running:
+* Docker (see the [official website](https://www.docker.com/) for installation instructions)
 * Apache Zookeeper `3.4.9`
 * Apache Kafka `0.10.2.0`
 * Logstash `5.3.0`
 * iQAS platform if using `-withIQAS` option
+
+## Project structure
+
+```
+project
+│
+└───etc
+│   │   capabilities.config
+│   │   app.config
+│
+└───src
+    │
+    └───utils
+    │   │   http_utils.py
+    │   │   obs_utils.py
+    │   │   time_utils.py
+    │
+    │   main.py
+    │   report.py
+    │   consumer.py
+```
 
 ## Building the virtual app container
 Inside the resources root directory (`virtual-app-consumer`), type the following command:
@@ -49,7 +71,6 @@ Instead, if you prefer to run the docker container in background (in detached mo
 ```
 $ docker run -d antoineog/virtual-app-consumer -withIQAS app1 "{\"application_id\": \"app1\", \"topic\": \"ALL\", \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}" 
 ```
-
 
 ## Managing the virtual app container
 
