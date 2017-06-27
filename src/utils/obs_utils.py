@@ -37,12 +37,19 @@ class ObsUtils(object):
     @staticmethod
     def extract_fields_from_jsonld(obs):
         fields_to_return = dict()
+        fields_to_return['qoo'] = dict()
+
         array_all_fields = obs['obs']
 
         for f in array_all_fields:
             if "@type" in f and f['@type'] == "http://purl.oclc.org/NET/ssnx/ssn#ObservationValue":
+                fields_to_return['obsStrValue'] = f['obsStrValue']
+                fields_to_return['quantityKind'] = f['hasQuantityKind']
+                fields_to_return['unit'] = f['hasUnit']
                 fields_to_return['timestamps'] = f['obsTimestampsValue']
             elif "@type" in f and f['@type'] == "http://purl.oclc.org/NET/ssnx/ssn#Observation":
                 fields_to_return['producer'] = f['observedBy'].split('#')[1]
+            elif "@type" in f and f['@type'] == "http://isae.fr/iqas/qoo-ontology#QoOValue":
+                fields_to_return['qoo'][f['@id'].split('#')[1].replace('qooValue_', '')] = f['qooStrValue']
 
         return fields_to_return

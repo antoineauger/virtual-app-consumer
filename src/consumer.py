@@ -59,5 +59,5 @@ class Consumer(object):
                                                config=self.config,
                                                battery_level=self.consumed_battery)
 
-            self.logstash.info(msg='TEST', extra=report.metrics)
+            self.logstash.info(msg='iQAS report', extra=report.metrics)
 
