@@ -24,10 +24,11 @@ class Report(object):
 
 class RDorInformationReport(Report):
     def __init__(self, use_iqas, observation, config, battery_level):
+        qoo = dict()
         if 'qoOAttributeValues' in observation:
-            qoo = observation['qoOAttributeValues']
-        else:
-            qoo = dict()
+            for k, v in observation['qoOAttributeValues'].items():
+                qoo[k] = float(v)
+
         super().__init__(use_iqas=use_iqas,
                          request_id=config['request_id'],
                          application_id=config['application_id'],

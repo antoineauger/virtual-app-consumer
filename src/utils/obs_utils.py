@@ -50,6 +50,6 @@ class ObsUtils(object):
             elif "@type" in f and f['@type'] == "http://purl.oclc.org/NET/ssnx/ssn#Observation":
                 fields_to_return['producer'] = f['observedBy'].split('#')[1]
             elif "@type" in f and f['@type'] == "http://isae.fr/iqas/qoo-ontology#QoOValue":
-                fields_to_return['qoo'][f['@id'].split('#')[1].replace('qooValue_', '')] = f['qooStrValue']
+                fields_to_return['qoo'][f['@id'].split('#')[1].replace('qooValue_', '')] = float(f['qooStrValue'])
 
         return fields_to_return
