@@ -67,7 +67,7 @@ Note: for more details about the format of an iQAS request, please refer to the 
 
 For instance, following commands are valid:
 ```
-$ docker run antoineog/virtual-app-consumer -withIQAS app1 "{\"application_id\": \"app1\", \"topic\": \"ALL\", \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}" 
+$ docker run antoineog/virtual-app-consumer -withIQAS app1 "{\"application_id\": \"app1\", \"topic\": \"ALL\", \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}"
 ```
 
 ```
@@ -78,14 +78,14 @@ To exit the container, just press `CTRL` + `C`.
 
 Instead, if you prefer to run the docker container in background (in detached mode), just add the `-d` option:
 ```
-$ docker run -d antoineog/virtual-app-consumer -withIQAS app1 "{\"application_id\": \"app1\", \"topic\": \"ALL\", \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}" 
+$ docker run -d antoineog/virtual-app-consumer -withIQAS app1 "{\"application_id\": \"app1\", \"topic\": \"ALL\", \"location\": \"ALL\", \"obs_level\": \"INFORMATION\"}"
 ```
 
 ## Managing the virtual app container
 
 The following are a quick remainder of basic docker commands.
 
-You can see docker containers and their statuses by running `docker ps`. 
+You can see docker containers and their statuses by running `docker ps`.
 ```
 $ docker ps
 CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                      NAMES
@@ -109,6 +109,6 @@ prickly_roentgen
 
 The iQAS platform have been developed during the PhD thesis of [Antoine Auger](https://personnel.isae-supaero.fr/antoine-auger/?lang=en) at ISAE-SUPAERO (2014-2017).
 
-This research was supported in part by the French Ministry of Defence through financial support of the Direction Générale de l’Armement (DGA). 
+This research was supported in part by the French Ministry of Defence through financial support of the Direction Générale de l’Armement (DGA).
 
-![iqas_logo](https://github.com/antoineauger/iqas-platform/blob/master/src/main/resources/web/figures/banniere.png?raw=true "Banniere")
+![banniere](https://github.com/antoineauger/iqas-platform/blob/master/src/main/resources/web/figures/banniere.png?raw=true "Banniere")
