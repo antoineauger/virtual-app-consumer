@@ -19,7 +19,7 @@ class Consumer(object):
             self.kafka_consumer.close()
 
     def run(self):
-        self.kafka_consumer = KafkaConsumer(bootstrap_servers='10.161.3.181:9092',
+        self.kafka_consumer = KafkaConsumer(bootstrap_servers='127.0.0.1:9092',
                                             group_id=None,
                                             auto_offset_reset='latest',
                                             enable_auto_commit=False,

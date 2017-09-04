@@ -24,7 +24,7 @@ def usage():
 
 
 if __name__ == "__main__":
-    host = '10.161.3.181'
+    host = '127.0.0.1'
     test_logger = logging.getLogger('python-logstash-logger')
     test_logger.setLevel(logging.INFO)
     test_logger.addHandler(logstash.UDPLogstashHandler(host, 54321, version=1))
